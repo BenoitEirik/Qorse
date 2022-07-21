@@ -30,9 +30,9 @@ function App() {
             <Typography
               variant="h4"
               component="div"
-              className="font-['89Speed']"
+              sx={{ textAlign: 'center', fontFamily: 'BomberEscort' }}
             >
-              Qorse
+              qorse
             </Typography>
           </Container>
         </Toolbar>

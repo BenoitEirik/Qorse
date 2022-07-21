@@ -38,56 +38,6 @@ function Torch() {
       <Box
         sx={{
           mt: '12px',
-          display: 'flex',
-          justifyContent: 'center'
-        }}
-      >
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'start',
-            alignItems: 'center',
-            minWidth: '50px',
-            width: '200px',
-            height: '100%',
-            bgcolor: 'black',
-            border: '1px solid',
-            borderColor: '#424242',
-            color: '#16C60C'
-          }}
-        >
-          <Typography
-            sx={{
-              pl: '8px',
-              fontFamily: 'LEDCalculator'
-            }}
-          >
-            TX:
-          </Typography>
-          <Typography
-            sx={{
-              width: '100%',
-              fontFamily: 'LEDCalculator',
-              textAlign: 'center'
-            }}
-          >
-            a
-          </Typography>
-          <Typography
-            sx={{
-              pr: '8px',
-              width: '100%',
-              fontFamily: 'MorseRegular',
-              textAlign: 'center'
-            }}
-          >
-            a
-          </Typography>
-        </Box>
-      </Box>
-
-      <Box
-        sx={{
           p: '12px',
           display: 'flex',
           justifyContent: 'space-evenly',
@@ -149,7 +99,41 @@ function Torch() {
             }
             label="Flash lumineux"
           />
-          <Divider style={{ backgroundColor: '#424242' }} />
+          <Box
+            sx={{
+              mt: '12px',
+              p: '4px 0px',
+              width: '100%',
+              border: '1px solid',
+              borderColor: '#424242',
+              bgcolor: 'black',
+              color: '#16c60c',
+              borderRadius: '4px'
+            }}
+          >
+            <Box
+              sx={{
+                p: '2px 12px',
+                paddingX: '12px',
+                display: 'flex',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Typography sx={{ fontFamily: 'LEDCalculator' }}>TX:</Typography>
+              <Typography sx={{ fontFamily: 'LEDCalculator' }}>...</Typography>
+            </Box>
+            <Box
+              sx={{
+                p: '1px 12px',
+                paddingX: '12px',
+                display: 'flex',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Typography sx={{ fontFamily: 'LEDCalculator' }}>Code:</Typography>
+              <Typography sx={{ fontFamily: 'LEDCalculator' }}>...</Typography>
+            </Box>
+          </Box>
         </Box>
 
         <Box
@@ -226,6 +210,8 @@ function Torch() {
 
       <Box
         sx={{
+          mb: '12px',
+          p: '12px',
           bgcolor: 'background.paper',
           border: '1px solid',
           borderRadius: '4px',
