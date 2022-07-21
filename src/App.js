@@ -4,16 +4,16 @@ import {
   Box,
   Toolbar,
   Typography,
-  Tabs,
-  Tab,
-  Container
+  Container,
+  Button
 } from '@mui/material';
 import Torch from './tabs/Torch';
+import Convert from './tabs/Convert';
 
 function App() {
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleTabs = (newValue) => {
     setValue(newValue);
   };
 
@@ -37,20 +37,56 @@ function App() {
           </Container>
         </Toolbar>
 
-        <Tabs
-          aria-label="basic tabs example"
-          variant="fullWidth"
-          indicatorColor="secondary"
-          textColor="inherit"
-          value={value}
-          onChange={handleChange}
+        <Box
+          sx={{
+            width: '100%',
+            height: '50px',
+            display: 'flex',
+            alignItems: 'center'
+          }}
         >
-          <Tab label="Torche" />
-          <Tab label="Convertir" />
-        </Tabs>
-      </AppBar>
+          <Button
+            sx={{
+              width: '50%',
+              height: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: '0'
+            }}
+            onClick={() => { handleTabs(0) }}
+            className={value === 0 ? 'tab-box-shadow' : ''}
+          >
+            <Typography sx={{ color: 'white' }}>Torche</Typography>
+          </Button>
 
-      <Torch />
+          <Button
+            sx={{
+              width: '50%',
+              height: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: '0'
+            }}
+            onClick={() => { handleTabs(1) }}
+            className={value === 1 ? 'tab-box-shadow' : ''}
+          >
+            <Typography sx={{ color: 'white' }}>Convertir</Typography>
+          </Button>
+        </Box>
+      </AppBar>
+      {
+        (
+          () => {
+            if (value === 0) {
+              return <Torch />;
+            } else if (value === 1) {
+              return <Convert />;
+            }
+          }
+        )()
+      }
     </Box>
   );
 }

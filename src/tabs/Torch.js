@@ -236,10 +236,60 @@ function Torch() {
         <Box
           sx={{
             width: '100%',
-            height: '100%'
+            height: '100%',
+            display: 'flex',
+            alignItems: 'stretch',
+            gap: '12px'
           }}
         >
-          f2
+          <Button
+            sx={{
+              flexGrow: '1',
+              fontFamily: 'MorseRegular',
+              borderRadius: '4px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+            style={{
+              backgroundImage: `url('${MetalBg}')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'left'
+            }}
+          >
+            <Box
+              sx={{
+                width: '20px',
+                height: '20px',
+                borderRadius: '50%',
+                bgcolor: '#424242'
+              }}
+            />
+          </Button>
+          <Button
+            sx={{
+              flexGrow: '1',
+              fontFamily: 'MorseRegular',
+              borderRadius: '4px',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+            style={{
+              backgroundImage: `url('${MetalBg}')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'right'
+            }}
+          >
+            <Box
+              sx={{
+                width: '60px',
+                height: '20px',
+                borderRadius: '12px',
+                bgcolor: '#424242'
+              }}
+            />
+          </Button>
         </Box>
       </Box>
     </Container>
