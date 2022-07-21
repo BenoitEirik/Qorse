@@ -1,0 +1,6 @@
+{
+	"appId": "com.benoiteirik.qorse",
+	"appName": "Qorse",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
