@@ -1,24 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  Tabs,
+  Tab,
+  Container
+} from '@mui/material';
+import Torch from './tabs/Torch';
 
 function App() {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <Box
+      sx={{
+        bgcolor: 'background.default'
+      }}
+      className='w-screen h-screen flex flex-col'
+    >
+      <AppBar position="static">
+        <Toolbar>
+          <Container>
+            <Typography
+              variant="h4"
+              component="div"
+              className="font-['89Speed']"
+            >
+              Qorse
+            </Typography>
+          </Container>
+        </Toolbar>
+
+        <Tabs
+          aria-label="basic tabs example"
+          variant="fullWidth"
+          indicatorColor="secondary"
+          textColor="inherit"
+          value={value}
+          onChange={handleChange}
         >
-          Learn React
-        </a>
-      </header>
-    </div>
+          <Tab label="Torche" />
+          <Tab label="Convertir" />
+        </Tabs>
+      </AppBar>
+
+      <Torch />
+    </Box>
   );
 }
 
