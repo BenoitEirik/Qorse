@@ -47,42 +47,71 @@ function App() {
         >
           <Button
             sx={{
-              width: '50%',
+              width: 'calc(100%/3)',
               height: '100%',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              borderRadius: '0'
+              borderRadius: '0',
+              borderLeft: '1px solid rgba(50, 50, 93, 0.25)',
+              borderTop: '1px solid rgba(50, 50, 93, 0.25)',
+              borderRight: '0.5px solid rgba(50, 50, 93, 0.25)'
             }}
             onClick={() => { handleTabs(0) }}
             className={value === 0 ? 'tab-box-shadow' : ''}
           >
-            <Typography sx={{ color: 'white' }}>Torche</Typography>
+            <Typography variant='button' color='text.primary'>Torche</Typography>
           </Button>
 
           <Button
             sx={{
-              width: '50%',
+              width: 'calc(100%/3)',
               height: '100%',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
-              borderRadius: '0'
+              borderRadius: '0',
+              borderLeft: '1px solid rgba(50, 50, 93, 0.25)',
+              borderTop: '1px solid rgba(50, 50, 93, 0.25)',
+              borderRight: '0.5px solid rgba(50, 50, 93, 0.25)'
             }}
             onClick={() => { handleTabs(1) }}
             className={value === 1 ? 'tab-box-shadow' : ''}
           >
-            <Typography sx={{ color: 'white' }}>Convertir</Typography>
+            <Typography variant='button' color='text.primary'>Convertir</Typography>
+          </Button>
+
+          <Button
+            sx={{
+              width: 'calc(100%/3)',
+              height: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: '0',
+              borderLeft: '1px solid rgba(50, 50, 93, 0.25)',
+              borderTop: '1px solid rgba(50, 50, 93, 0.25)',
+              borderRight: '0.5px solid rgba(50, 50, 93, 0.25)'
+            }}
+            onClick={() => { handleTabs(2) }}
+            className={value === 2 ? 'tab-box-shadow' : ''}
+          >
+            <Typography variant='button' color='text.primary'>ABC</Typography>
           </Button>
         </Box>
       </AppBar>
       {
         (
           () => {
-            if (value === 0) {
-              return <Torch />;
-            } else if (value === 1) {
-              return <Convert />;
+            switch (value) {
+              case 0:
+                return <Torch />;
+              case 1:
+                return <Convert />;
+              case 2:
+                return <div />;
+              default:
+                return <Torch />;
             }
           }
         )()
