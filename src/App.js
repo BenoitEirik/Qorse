@@ -7,6 +7,7 @@ import {
   Container,
   Button
 } from '@mui/material';
+import SwipeableViews from './react-swipeable-views/src';
 import Torch from './tabs/Torch';
 import Convert from './tabs/Convert';
 
@@ -100,22 +101,13 @@ function App() {
           </Button>
         </Box>
       </AppBar>
-      {
-        (
-          () => {
-            switch (value) {
-              case 0:
-                return <Torch />;
-              case 1:
-                return <Convert />;
-              case 2:
-                return <div />;
-              default:
-                return <Torch />;
-            }
-          }
-        )()
-      }
+
+      <SwipeableViews>
+        <Torch />
+        <Convert />
+        <div />
+      </SwipeableViews>
+
     </Box>
   );
 }
