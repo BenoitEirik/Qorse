@@ -102,7 +102,13 @@ function App() {
         </Box>
       </AppBar>
 
-      <SwipeableViews>
+      <SwipeableViews
+      index={value}
+        style={{ height: '100%' }}
+        containerStyle={{
+          height: '100%'
+        }}
+      >
         <Torch />
         <Convert />
         <div />
