@@ -8,7 +8,7 @@ import {
   Button
 } from '@mui/material';
 import SwipeableViews from './react-swipeable-views/src';
-import Torch from './tabs/Torch';
+import Transmit from './tabs/Transmit';
 import Convert from './tabs/Convert';
 
 function App() {
@@ -61,7 +61,7 @@ function App() {
             onClick={() => { handleTabs(0) }}
             className={value === 0 ? 'tab-box-shadow' : ''}
           >
-            <Typography variant='button' color='text.primary'>Torche</Typography>
+            <Typography variant='button' color='text.primary'>Transmettre</Typography>
           </Button>
 
           <Button
@@ -109,7 +109,7 @@ function App() {
           height: '100%'
         }}
       >
-        <Torch />
+        <Transmit />
         <Convert />
         <div />
       </SwipeableViews>
