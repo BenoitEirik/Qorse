@@ -23,7 +23,28 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   }
 }));
 
+
 function Torch() {
+  // Gauge 
+  const [gauge, setGauge] = React.useState(1);
+  const intervalRef = React.useRef();
+
+  const startGaugeIncreasing = () => {
+    if (intervalRef.current)
+      return;
+    intervalRef.current = setInterval(() => {
+      setGauge((prevGauge) => prevGauge + 3);
+    }, 2);
+  };
+
+  const resetGaugeIncreasing = () => {
+    if (intervalRef.current) {
+      setGauge(1);
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
   return (
     <Container
       sx={{
@@ -148,6 +169,7 @@ function Torch() {
         >
           <Box
             sx={{
+              position: 'relative',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -161,13 +183,24 @@ function Torch() {
           >
             <Box
               sx={{
+                position: 'absolute',
+                left: '-1px',
+                top: '65%',
+                width: '10px',
+                height: '10px',
+                bgcolor: 'background.paper'
+              }}
+            >
+
+            </Box>
+            <Box
+              sx={{
                 width: '100%',
-                height: '2%',
+                height: gauge + '%',
                 bgcolor: '#16C60C'
               }}
               style={{
-                borderBottomLeftRadius: '8px',
-                borderBottomRightRadius: '8px'
+                borderRadius: '8px'
               }}
             />
           </Box>
@@ -187,6 +220,8 @@ function Torch() {
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}
+            onMouseDown={startGaugeIncreasing}
+            onMouseUp={resetGaugeIncreasing}
           >
             <PodcastsOutlinedIcon
               sx={{
