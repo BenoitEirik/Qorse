@@ -14,6 +14,7 @@ import BoltOutlinedIcon from '@mui/icons-material/BoltOutlined';
 import SpeakerPhoneOutlinedIcon from '@mui/icons-material/SpeakerPhoneOutlined';
 import MetalBg from '../assets/images/—Pngtree—metal chrome silver background_5405202.jpg';
 import SwipeableViews from '../react-swipeable-views/src';
+import { Flashlight } from '@awesome-cordova-plugins/flashlight/ngx';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   '.MuiSwitch-thumb': {
@@ -29,17 +30,21 @@ function Torch() {
   // Gauge 
   const [gauge, setGauge] = React.useState(1);
   var [intervalID, setIntervalID] = React.useState(null);
+  var fl = new Flashlight();
 
   const startGaugeIncreasing = () => {
     if (intervalID !== null)
       return;
-      setIntervalID(setInterval(() => {
+
+    setIntervalID(setInterval(() => {
+      fl.toggle();
       setGauge((prevGauge) => prevGauge + 3);
     }, 2));
   };
 
   const resetGaugeIncreasing = () => {
     if (intervalID !== null) {
+      fl.toggle();
       setGauge(1);
       clearInterval(intervalID);
       setIntervalID(null);
