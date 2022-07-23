@@ -108,6 +108,7 @@ function App() {
         containerStyle={{
           height: '100%'
         }}
+        disabled='true'
       >
         <Transmit />
         <Convert />

@@ -13,9 +13,10 @@ import PodcastsOutlinedIcon from '@mui/icons-material/PodcastsOutlined';
 import BoltOutlinedIcon from '@mui/icons-material/BoltOutlined';
 import SpeakerPhoneOutlinedIcon from '@mui/icons-material/SpeakerPhoneOutlined';
 import MetalBg from '../assets/images/—Pngtree—metal chrome silver background_5405202.jpg';
+import SwipeableViews from '../react-swipeable-views/src';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
-  '& .MuiSwitch-thumb': {
+  '.MuiSwitch-thumb': {
     width: 20,
     height: 20,
     backgroundImage: `url('${MetalBg}')`,
@@ -98,6 +99,51 @@ function Torch() {
             }
             label="Pulsion sonore"
           />
+          <Box
+            sx={{
+              position: 'relative',
+              marginY: '12px',
+              p: '4px 0px',
+              width: '100%',
+              height: '30px',
+              border: '1px solid',
+              borderColor: '#424242',
+              bgcolor: 'lightgrey',
+              color: '#424242',
+              borderRadius: '4px',
+              boxShadow: 'rgb(44, 62, 80) 15px 0px 15px -15px inset, rgb(44, 62, 80) -15px 0px 15px -15px inset',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              overflow: 'hidden'
+            }}
+          >
+            <div
+              style={{
+                position: 'absolute',
+                top: '26px',
+                left: 'calc(50% - 6px)',
+                width: '0px',
+                height: '0px',
+                borderTop: '6px solid transparent',
+                borderBottom: '6px solid #424242',
+                borderLeft: '6px solid transparent',
+                borderRight: '6px solid transparent'
+              }}
+            />
+            <SwipeableViews
+              style={{
+                width: '50%',
+                textAlign: 'center',
+                overflow: 'visible'
+              }}
+              enableMouseEvents='true'
+            >
+              <div style={{ userSelect: 'none', cursor: 'grab' }}>Sinusoide</div>
+              <div style={{ userSelect: 'none', cursor: 'grab' }}>Triangulaire</div>
+              <div style={{ userSelect: 'none', cursor: 'grab' }}>Carré</div>
+            </SwipeableViews>
+          </Box>
           <Divider style={{ backgroundColor: '#424242' }} />
           <Box
             sx={{
