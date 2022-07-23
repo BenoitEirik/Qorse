@@ -58,6 +58,7 @@ function Torch() {
     >
       <Box
         sx={{
+          flexGrow: '1',
           mt: '12px',
           p: '12px',
           display: 'flex',
@@ -68,7 +69,6 @@ function Torch() {
           borderRadius: '4px',
           borderColor: 'primary.main'
         }}
-        className='basis-8/12 border-1 rounded-lg '
       >
         <Box
           sx={{
@@ -245,14 +245,15 @@ function Torch() {
 
       <Box
         sx={{
+          flexGrow: '1',
           mb: '12px',
           p: '12px',
+          maxHeight: '100px',
           bgcolor: 'background.paper',
           border: '1px solid',
           borderRadius: '4px',
           borderColor: 'primary.main'
         }}
-        className='mb-3 p-3 grow border-1 rounded-lg'
       >
         <Box
           sx={{
