@@ -28,21 +28,21 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 function Torch() {
   // Gauge 
   const [gauge, setGauge] = React.useState(1);
-  const intervalRef = React.useRef();
+  var [intervalID, setIntervalID] = React.useState(null);
 
   const startGaugeIncreasing = () => {
-    if (intervalRef.current)
+    if (intervalID !== null)
       return;
-    intervalRef.current = setInterval(() => {
+      setIntervalID(setInterval(() => {
       setGauge((prevGauge) => prevGauge + 3);
-    }, 2);
+    }, 2));
   };
 
   const resetGaugeIncreasing = () => {
-    if (intervalRef.current) {
+    if (intervalID !== null) {
       setGauge(1);
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
+      clearInterval(intervalID);
+      setIntervalID(null);
     }
   };
 
@@ -137,7 +137,7 @@ function Torch() {
                 textAlign: 'center',
                 overflow: 'visible'
               }}
-              enableMouseEvents='true'
+              enableMouseEvents={true}
             >
               <div style={{ userSelect: 'none', cursor: 'grab' }}>Sinusoide</div>
               <div style={{ userSelect: 'none', cursor: 'grab' }}>Triangulaire</div>
@@ -239,14 +239,12 @@ function Torch() {
             >
 
             </Box>
-            <Box
-              sx={{
+            <div
+              style={{
                 width: '100%',
                 height: gauge + '%',
-                bgcolor: '#16C60C'
-              }}
-              style={{
-                borderRadius: '8px'
+                borderRadius: '8px',
+                backgroundColor: '#16C60C'
               }}
             />
           </Box>
