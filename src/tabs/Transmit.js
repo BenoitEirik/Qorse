@@ -41,8 +41,9 @@ function Torch() {
     if (intervalID.current !== null)
       return;
 
+    setGauge(35);
     intervalID.current = setInterval(() => {
-      setGauge((prevGauge) => prevGauge + 4);
+      setGauge((prevGauge) => prevGauge + 6);
     }, 2);
 
     if (torch)
