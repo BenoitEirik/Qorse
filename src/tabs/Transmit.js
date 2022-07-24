@@ -291,10 +291,11 @@ function Torch() {
             }}
             variant='contained'
             style={{
-              backgroundImage: `url('${MetalBg}')`,
+              backgroundImage: `${gauge > 1 ? 'linear-gradient(to bottom, transparent, #9e9e9e), ' : ''}url('${MetalBg}')`,
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}
+            disableRipple='true'
             onTouchStart={startGaugeIncreasing}
             onTouchEnd={resetGaugeIncreasing}
           >
