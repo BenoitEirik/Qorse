@@ -25,12 +25,17 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   }
 }));
 
+var audioCtx = new AudioContext();
 
 function Torch() {
   // Gauge 
   const [gauge, setGauge] = React.useState(1);
   const intervalID = React.useRef(null);
+  // Options
   const [torch, setTorch] = React.useState(true);
+  const [sound, setSound] = React.useState(false);
+  const [oscillator, setOscillator] = React.useState(null);
+  const [selectedSound, setSelectedSound] = React.useState(0);
 
   const startGaugeIncreasing = () => {
     if (intervalID.current !== null)
@@ -42,6 +47,14 @@ function Torch() {
 
     if (torch)
       Flashlight.switchOn();
+
+    if (sound) {
+      var tmpOscillator = audioCtx.createOscillator()
+      tmpOscillator.type = ['sine','triangle','square','sawtooth'][selectedSound];
+      tmpOscillator.connect(audioCtx.destination);
+      tmpOscillator.start();
+      setOscillator(tmpOscillator);
+    }
   };
 
   const resetGaugeIncreasing = () => {
@@ -50,7 +63,13 @@ function Torch() {
       clearInterval(intervalID.current);
       intervalID.current = null;
 
-      Flashlight.switchOff();
+      if (torch)
+        Flashlight.switchOff();
+
+      if (sound) {
+        oscillator.stop();
+        setOscillator(null);
+      }
     }
   };
 
@@ -103,7 +122,7 @@ function Torch() {
               width: '100%'
             }}
             control={
-              <MaterialUISwitch />
+              <MaterialUISwitch checked={sound} onChange={() => {setSound(prevSound => !prevSound)}} />
             }
             label="Pulsion sonore"
           />
@@ -143,13 +162,16 @@ function Torch() {
               style={{
                 width: '50%',
                 textAlign: 'center',
-                overflow: 'visible'
+                overflow: 'visible',
+                fontSize: '12px'
               }}
               enableMouseEvents={true}
+              onChangeIndex={(index) => {setSelectedSound(index)}}
             >
               <div style={{ userSelect: 'none', cursor: 'grab' }}>Sinusoide</div>
               <div style={{ userSelect: 'none', cursor: 'grab' }}>Triangulaire</div>
               <div style={{ userSelect: 'none', cursor: 'grab' }}>Carré</div>
+              <div style={{ userSelect: 'none', cursor: 'grab' }}>Dents</div>
             </SwipeableViews>
           </Box>
           <Divider style={{ backgroundColor: '#424242' }} />
