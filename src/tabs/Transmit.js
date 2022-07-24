@@ -14,7 +14,7 @@ import BoltOutlinedIcon from '@mui/icons-material/BoltOutlined';
 import SpeakerPhoneOutlinedIcon from '@mui/icons-material/SpeakerPhoneOutlined';
 import MetalBg from '../assets/images/—Pngtree—metal chrome silver background_5405202.jpg';
 import SwipeableViews from '../react-swipeable-views/src';
-import { Flashlight } from '@awesome-cordova-plugins/flashlight/ngx';
+import { Flashlight } from '@awesome-cordova-plugins/flashlight';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   '.MuiSwitch-thumb': {
@@ -29,25 +29,28 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 function Torch() {
   // Gauge 
   const [gauge, setGauge] = React.useState(1);
-  var [intervalID, setIntervalID] = React.useState(null);
-  var fl = new Flashlight();
+  const intervalID = React.useRef(null);
+  const [torch, setTorch] = React.useState(true);
 
   const startGaugeIncreasing = () => {
-    if (intervalID !== null)
+    if (intervalID.current !== null)
       return;
 
-    setIntervalID(setInterval(() => {
-      fl.toggle();
-      setGauge((prevGauge) => prevGauge + 3);
-    }, 2));
+    intervalID.current = setInterval(() => {
+      setGauge((prevGauge) => prevGauge + 4);
+    }, 2);
+
+    if (torch)
+      Flashlight.switchOn();
   };
 
   const resetGaugeIncreasing = () => {
-    if (intervalID !== null) {
-      fl.toggle();
+    if (intervalID.current !== null) {
       setGauge(1);
-      clearInterval(intervalID);
-      setIntervalID(null);
+      clearInterval(intervalID.current);
+      intervalID.current = null;
+
+      Flashlight.switchOff();
     }
   };
 
@@ -167,7 +170,7 @@ function Torch() {
               width: '100%'
             }}
             control={
-              <MaterialUISwitch />
+              <MaterialUISwitch checked={torch} onChange={() => {setTorch(prevTorch => !prevTorch)}} />
             }
             label="Flash lumineux"
           />
@@ -269,8 +272,8 @@ function Torch() {
               backgroundSize: 'cover',
               backgroundPosition: 'center'
             }}
-            onMouseDown={startGaugeIncreasing}
-            onMouseUp={resetGaugeIncreasing}
+            onTouchStart={startGaugeIncreasing}
+            onTouchEnd={resetGaugeIncreasing}
           >
             <PodcastsOutlinedIcon
               sx={{
