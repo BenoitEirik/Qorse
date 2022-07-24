@@ -15,6 +15,7 @@ import SpeakerPhoneOutlinedIcon from '@mui/icons-material/SpeakerPhoneOutlined';
 import MetalBg from '../assets/images/—Pngtree—metal chrome silver background_5405202.jpg';
 import SwipeableViews from '../react-swipeable-views/src';
 import { Flashlight } from '@awesome-cordova-plugins/flashlight';
+import toCharacter from '../utils/morse';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   '.MuiSwitch-thumb': {
@@ -36,12 +37,20 @@ function Torch() {
   const [sound, setSound] = React.useState(false);
   const [oscillator, setOscillator] = React.useState(null);
   const [selectedSound, setSelectedSound] = React.useState(0);
+  // Screen
+  const timeoutID = React.useRef(null);
+  const [buffer, setBuffer] = React.useState('');
+  const [character, setCharacter] = React.useState('');
 
   const startGaugeIncreasing = () => {
+    // Reset timer between two pressing the button
+    if (timeoutID.current)
+      clearTimeout(timeoutID.current);
+
     if (intervalID.current !== null)
       return;
 
-    setGauge(35);
+    setGauge(35); // Offset for a simple 'Ti'
     intervalID.current = setInterval(() => {
       setGauge((prevGauge) => prevGauge + 6);
     }, 2);
@@ -51,7 +60,7 @@ function Torch() {
 
     if (sound) {
       var tmpOscillator = audioCtx.createOscillator()
-      tmpOscillator.type = ['sine','triangle','square','sawtooth'][selectedSound];
+      tmpOscillator.type = ['sine', 'triangle', 'square', 'sawtooth'][selectedSound];
       tmpOscillator.connect(audioCtx.destination);
       tmpOscillator.start();
       setOscillator(tmpOscillator);
@@ -60,6 +69,18 @@ function Torch() {
 
   const resetGaugeIncreasing = () => {
     if (intervalID.current !== null) {
+      if (gauge <= 35) {
+        setBuffer(prevBuffer =>{
+          setCharacter(toCharacter(prevBuffer + '.'));
+          return prevBuffer + '.';
+        }) // 'Ti'
+      } else {
+        setBuffer(prevBuffer => {
+          setCharacter(toCharacter(prevBuffer + '_'));
+          return prevBuffer + '_';
+        }) // 'Ta'
+      }
+
       setGauge(1);
       clearInterval(intervalID.current);
       intervalID.current = null;
@@ -71,6 +92,12 @@ function Torch() {
         oscillator.stop();
         setOscillator(null);
       }
+
+      // Set timeout before decode
+      timeoutID.current = setTimeout(() => {
+        setCharacter('');
+        setBuffer('');
+      }, 650);
     }
   };
 
@@ -123,7 +150,7 @@ function Torch() {
               width: '100%'
             }}
             control={
-              <MaterialUISwitch checked={sound} onChange={() => {setSound(prevSound => !prevSound)}} />
+              <MaterialUISwitch checked={sound} onChange={() => { setSound(prevSound => !prevSound) }} />
             }
             label="Pulsion sonore"
           />
@@ -167,7 +194,7 @@ function Torch() {
                 fontSize: '12px'
               }}
               enableMouseEvents={true}
-              onChangeIndex={(index) => {setSelectedSound(index)}}
+              onChangeIndex={(index) => { setSelectedSound(index) }}
             >
               <div style={{ userSelect: 'none', cursor: 'grab' }}>Sinusoide</div>
               <div style={{ userSelect: 'none', cursor: 'grab' }}>Triangulaire</div>
@@ -193,7 +220,7 @@ function Torch() {
               width: '100%'
             }}
             control={
-              <MaterialUISwitch checked={torch} onChange={() => {setTorch(prevTorch => !prevTorch)}} />
+              <MaterialUISwitch checked={torch} onChange={() => { setTorch(prevTorch => !prevTorch) }} />
             }
             label="Flash lumineux"
           />
@@ -218,7 +245,7 @@ function Torch() {
               }}
             >
               <Typography sx={{ fontFamily: 'LEDCalculator' }}>TX:</Typography>
-              <Typography sx={{ fontFamily: 'LEDCalculator' }}>...</Typography>
+              <Typography sx={{ fontFamily: 'LEDCalculator' }}>{character}</Typography>
             </Box>
             <Box
               sx={{
@@ -229,7 +256,7 @@ function Torch() {
               }}
             >
               <Typography sx={{ fontFamily: 'LEDCalculator' }}>Code:</Typography>
-              <Typography sx={{ fontFamily: 'LEDCalculator' }}>...</Typography>
+              <Typography sx={{ fontFamily: 'LEDCalculator' }}>{buffer}</Typography>
             </Box>
           </Box>
         </Box>
