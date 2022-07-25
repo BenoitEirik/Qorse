@@ -2,5 +2,9 @@
 	"appId": "com.benoiteirik.qorse",
 	"appName": "Qorse",
 	"webDir": "build",
-	"bundledWebRuntime": false
+	"bundledWebRuntime": false,
+	"server": {
+		"url": "http://192.168.242.173:3000",
+		"cleartext": true
+	}
 }

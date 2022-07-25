@@ -19,7 +19,7 @@ switch (process.env.NODE_ENV) {
     config = {
       ...baseConfig,
       server: {
-        url: "http://192.168.214.117:3000",
+        url: "http://192.168.242.173:3000",
         cleartext: true
       }
     };
