@@ -21,9 +21,12 @@ function App() {
   return (
     <Box
       sx={{
-        bgcolor: 'background.default'
+        width: '100vw',
+        height: '100vh',
+        bgcolor: 'background.default',
+        display: 'flex',
+        flexDirection: 'column'
       }}
-      className='w-screen h-screen flex flex-col'
     >
       <AppBar position="static">
         <Toolbar>
