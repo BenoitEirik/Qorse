@@ -13,6 +13,7 @@ import PodcastsOutlinedIcon from '@mui/icons-material/PodcastsOutlined';
 import BoltOutlinedIcon from '@mui/icons-material/BoltOutlined';
 import SpeakerPhoneOutlinedIcon from '@mui/icons-material/SpeakerPhoneOutlined';
 import MetalBg from '../assets/images/—Pngtree—metal chrome silver background_5405202.jpg';
+import MetalBgDots from '../assets/images/—Pngtree—silver metal background 1108_3551691.jpg';
 import SwipeableViews from '../react-swipeable-views/src';
 import { Flashlight } from '@awesome-cordova-plugins/flashlight';
 import toCharacter from '../utils/morse';
@@ -357,66 +358,12 @@ function Torch() {
           borderRadius: '4px',
           borderColor: 'primary.main'
         }}
-      >
-        <Box
-          sx={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'stretch',
-            gap: '12px'
-          }}
-        >
-          <Button
-            sx={{
-              flexGrow: '1',
-              fontFamily: 'MorseRegular',
-              borderRadius: '4px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-            style={{
-              backgroundImage: `url('${MetalBg}')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'left'
-            }}
-          >
-            <Box
-              sx={{
-                width: '20px',
-                height: '20px',
-                borderRadius: '50%',
-                bgcolor: '#424242'
-              }}
-            />
-          </Button>
-          <Button
-            sx={{
-              flexGrow: '1',
-              fontFamily: 'MorseRegular',
-              borderRadius: '4px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-            style={{
-              backgroundImage: `url('${MetalBg}')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'right'
-            }}
-          >
-            <Box
-              sx={{
-                width: '60px',
-                height: '20px',
-                borderRadius: '12px',
-                bgcolor: '#424242'
-              }}
-            />
-          </Button>
-        </Box>
-      </Box>
+        style={{
+          backgroundImage: `url('${MetalBgDots}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      />
     </Container>
   );
 }
