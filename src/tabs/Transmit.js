@@ -98,7 +98,7 @@ function Torch() {
       timeoutID.current = setTimeout(() => {
         setCharacter('');
         setBuffer('');
-      }, 650);
+      }, 600);
     }
   };
 

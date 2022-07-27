@@ -29,6 +29,22 @@ const TranslationSwitch = styled(Switch)(({ theme }) => ({
 function Convert() {
   const [tiClicked, setTiClicked] = React.useState(false);
   const [taClicked, setTaClicked] = React.useState(false);
+  const timeoutID = React.useRef(null);
+  const [morseCode, setMorseCode] = React.useState('');
+  const textareaRef = React.useRef();
+  React.useEffect(() => {
+    textareaRef.current.focus();
+  }, [morseCode]);
+
+  const writeMorseCode = (value) => {
+    if (timeoutID.current)
+      clearInterval(timeoutID.current);
+
+    setMorseCode(prevMorseCode => prevMorseCode + value);
+    timeoutID.current = setTimeout(() => {
+      setMorseCode(prevMorseCode => prevMorseCode + ' ');
+    }, 600);
+  };
 
   return (
     <Container
@@ -57,44 +73,62 @@ function Convert() {
         }}
       >
         <Box
-            sx={{
-              flexGrow: '1',
-              p: '4px 0px',
+          sx={{
+            height: '100%',
+            width: '100%',
+            border: '1px solid',
+            borderColor: '#424242',
+            bgcolor: 'black',
+            borderRadius: '4px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'stretch'
+          }}
+        >
+          <textarea
+            ref={textareaRef}
+            style={{
+              padding: '4px 12px',
               width: '100%',
-              border: '1px solid',
-              borderColor: '#424242',
-              bgcolor: 'black',
-              color: '#16c60c',
-              borderRadius: '4px'
-            }}
-          >
-            
-          </Box>
-          <Box
-            sx={{
+              fontFamily: 'LEDCalculator',
               display: 'flex',
-              justifyContent: 'space-evenly',
-              alignItems: 'center'
+              flexWrap: 'wrap',
+              overflowY: 'scroll',
+              borderRadius: '4px',
+              backgroundColor: 'black',
+              border: 'none',
+              color: '#16c60c'
             }}
+            value={morseCode}
+            readOnly
           >
-            <Typography sx={{ color: 'white' }}>Morse</Typography>
-            <TranslationSwitch />
-            <Typography sx={{ color: 'white' }}>Langage</Typography>
-          </Box>
-          <Box
-            sx={{
-              flexGrow: '1',
-              p: '4px 0px',
-              width: '100%',
-              border: '1px solid',
-              borderColor: '#424242',
-              bgcolor: 'black',
-              color: '#16c60c',
-              borderRadius: '4px'
-            }}
-          >
-            
-          </Box>
+          </textarea>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-evenly',
+            alignItems: 'center'
+          }}
+        >
+          <Typography sx={{ color: 'white' }}>Morse</Typography>
+          <TranslationSwitch />
+          <Typography sx={{ color: 'white' }}>Langage</Typography>
+        </Box>
+        <Box
+          sx={{
+            height: '50%',
+            p: '4px 0px',
+            width: '100%',
+            border: '1px solid',
+            borderColor: '#424242',
+            bgcolor: 'black',
+            color: '#16c60c',
+            borderRadius: '4px'
+          }}
+        >
+
+        </Box>
       </Box>
 
       <Box
@@ -133,8 +167,9 @@ function Convert() {
               backgroundPosition: 'left'
             }}
             disableRipple='true'
-            onTouchStart={() => {setTiClicked(true)}}
-            onTouchEnd={() => {setTiClicked(false)}}
+            onTouchStart={() => { setTiClicked(true) }}
+            onTouchEnd={() => { setTiClicked(false) }}
+            onClick={() => { writeMorseCode('.') }}
           >
             <Box
               sx={{
@@ -160,8 +195,9 @@ function Convert() {
               backgroundPosition: 'right'
             }}
             disableRipple='true'
-            onTouchStart={() => {setTaClicked(true)}}
-            onTouchEnd={() => {setTaClicked(false)}}
+            onTouchStart={() => { setTaClicked(true) }}
+            onTouchEnd={() => { setTaClicked(false) }}
+            onClick={() => { writeMorseCode('_') }}
           >
             <Box
               sx={{
